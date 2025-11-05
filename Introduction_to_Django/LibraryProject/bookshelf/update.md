@@ -1,8 +1,15 @@
-# update.md
+# Update a Book Entry
 
-from bookshelf.models import Book
-
-# Retrieve the book and update its publication year
+```python
+# Retrieve the book object
 book = Book.objects.get(title="1984")
-book.publication_year = 1950
+
+# Update the book title
+book.title = "Nineteen Eighty-Four"
+
+# Save the changes to the database
 book.save()
+
+# Verify the update
+updated_book = Book.objects.get(title="Nineteen Eighty-Four")
+print(updated_book.title)
