@@ -1,12 +1,7 @@
+# retrieve.md
 
----
-
-## 📗 `retrieve.md`
-```markdown
-# Retrieve Operation
-
-```python
 from bookshelf.models import Book
 
-# Retrieve all Book records
-Book.objects.all()
+# Retrieve the book titled "1984"
+book = Book.objects.get(title="1984")
+print(book)

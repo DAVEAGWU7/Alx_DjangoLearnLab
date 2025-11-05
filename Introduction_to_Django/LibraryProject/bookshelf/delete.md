@@ -1,18 +1,7 @@
+# delete.md
 
----
-
-## 📕 `delete.md`
-```markdown
-# Delete Operation
-
-```python
 from bookshelf.models import Book
 
-# Retrieve the book
-book = Book.objects.get(title="Nineteen Eighty-Four")
-
-# Delete the book
+# Retrieve the book and delete it
+book = Book.objects.get(title="1984")
 book.delete()
-
-# Confirm deletion
-Book.objects.all()
