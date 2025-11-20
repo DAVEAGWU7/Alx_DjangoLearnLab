@@ -20,3 +20,12 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('books/', include('bookshelf.urls')),   # ← THIS LINE IS IMPORTANT
+]
+ 
