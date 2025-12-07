@@ -1,31 +1,28 @@
 from django.urls import path
-from .views import (
-    PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView,
-    CommentCreateView, CommentUpdateView, CommentDeleteView,
-    search_posts, posts_by_tag,
-    register_view, login_view, logout_view, profile_view,
-)
+from . import views
 
 urlpatterns = [
     # Post URLs
-    path('', PostListView.as_view(), name='post-list'),
-    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    path('post/new/', PostCreateView.as_view(), name='post-create'),
-    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
-    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+    path('', views.PostListView.as_view(), name='post-list'),
+    path('post/<int:pk>/', views.PostDetailView.as_view(), name='post-detail'),
+    path('post/new/', views.PostCreateView.as_view(), name='post-create'),
+    path('post/<int:pk>/update/', views.PostUpdateView.as_view(), name='post-update'),
+    path('post/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post-delete'),
 
     # Comment URLs
-    path('posts/<int:post_id>/comments/new/', CommentCreateView.as_view(), name='comment-create'),
-    path('comments/<int:pk>/update/', CommentUpdateView.as_view(), name='comment-update'),
-    path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
-
-    # Tag & Search URLs
-    path('search/', search_posts, name='search-posts'),
-    path('tag/<str:tag_name>/', posts_by_tag, name='posts-by-tag'),
+    path('post/<int:post_id>/comment/new/', views.CommentCreateView.as_view(), name='comment-create'),
+    path('comment/<int:pk>/update/', views.CommentUpdateView.as_view(), name='comment-update'),
+    path('comment/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='comment-delete'),
 
     # Auth URLs
-    path('register/', register_view, name='register'),
-    path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout'),
-    path('profile/', profile_view, name='profile'),
+    path('register/', views.register_view, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('profile/', views.profile_view, name='profile'),
+
+    # Tag URLs
+    path('tag/<str:tag_name>/', views.posts_by_tag, name='posts-by-tag'),
+
+    # Search
+    path('search/', views.search_posts, name='search-posts'),
 ]
