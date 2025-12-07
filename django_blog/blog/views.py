@@ -4,29 +4,6 @@ from .models import Post
 from .forms import PostForm
 from django.urls import reverse_lazy
 
-# List all posts
-class PostListView(ListView):
-    model = Post
-    template_name = 'blog/post_list.html'
-    context_object_name = 'posts'
-    ordering = ['-published_date']
-
-# Detail of a single post
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'blog/post_detail.html'
-
-# Create a new post (authenticated users only)
-class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Post
-    form_class = PostForm
-    template_name = 'blog/post_form.html'
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-# Update post (only the author can update)
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     form_class = PostForm
@@ -36,7 +13,6 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         post = self.get_object()
         return self.request.user == post.author
 
-# Delete post (only the author can delete)
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'blog/post_confirm_delete.html'
