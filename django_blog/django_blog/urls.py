@@ -14,3 +14,4 @@ urlpatterns = [
     path('logout/', blog_views.logout_view, name='logout'),
     path('profile/', blog_views.profile_view, name='profile'),
 ]
+
