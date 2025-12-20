@@ -18,6 +18,17 @@ router.register('comments', CommentViewSet)
 
 urlpatterns = [
     path('feed/', feed, name='user-feed'),
+    
 ]
 
 urlpatterns += router.urls
+
+
+from django.urls import path
+from .views import FeedView
+
+urlpatterns = [
+    path('feed/', FeedView.as_view(), name='feed'),
+]
+
+
